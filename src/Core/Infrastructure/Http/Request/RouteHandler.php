@@ -40,7 +40,7 @@ class RouteHandler
                 if ($controllerRoute->match($route)) {
                     $controller = new $controllerInstance();
                     /** @var Response $controllerResponse */
-                    $controllerResponse = $controller->$controllerAction($request);
+                    $controllerResponse = $controller->$controllerAction();
                     return $controllerResponse->render();
                 }
             }

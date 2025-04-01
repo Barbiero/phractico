@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Tests\Helpers\API\Http;
 
 use Phractico\Core\Infrastructure\Http\Controller;
+use Phractico\Core\Infrastructure\Http\Request\RequestHandler;
 use Phractico\Core\Infrastructure\Http\Request\Route;
 use Phractico\Core\Infrastructure\Http\Request\RouteCollection;
 use Phractico\Core\Infrastructure\Http\Response;
@@ -29,8 +30,9 @@ class FakeController implements Controller
         );
     }
 
-    public function fakeWithRequestInterface(RequestInterface $request): Response
+    public function fakeWithRequestInterface(): Response
     {
+        $request = RequestHandler::getIncomingRequest();
         return new JsonResponse(
             status: 200,
             body: ['message' => 'FakeController with params: ' . $request->getUri()->getQuery()],
